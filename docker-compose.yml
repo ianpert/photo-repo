@@ -1,0 +1,43 @@
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - authentication
+  db: 
+    image: "postgres:16"
+    command: postgres -c 'max_connections=350'
+    user: postgres
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_DB: photos
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod", "-U", "postgres"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+      start_period: 5s  
+    ports:
+      - "6001:5432" # host:container
+    networks:
+      - authentication
+    volumes:
+      - photos-db:/var/lib/postgresql/data
+      
+volumes:
+  photos-db:
+
+networks:
+  authentication:
+
+
+
+
+  

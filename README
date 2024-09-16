@@ -1,0 +1,50 @@
+# Pet Photo API
+
+A simple API that retrieves photos of animals (dogs, cats, and bears) based on the specified type.
+
+## Getting Started
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Running the Application
+
+1. **Build the Docker images:**
+
+   ```bash
+   docker-compose build
+
+2. **Start the application:**
+
+    Run docker-compose up in your terminal. This will start the application and make it available on your local machine.
+
+3. **Access the API:**
+
+    Visit http://localhost:8080/photos/{Animal Type} in your browser.
+
+    Replace {Animal Type} with either:
+
+    dog
+    cat
+    bear
+    For example:
+
+    http://localhost:8080/photos/dog
+
+4. **Optional: Specify the number of photos:**
+
+    You can specify the number of photos to retrieve using the n query parameter.
+    If n is not provided, the API will save 1 photo by default.
+
+    Example:
+
+        http://localhost:8080/photos/cat?n=3
+
+        This will save 3 cat photos. 
+
+5. **Stopping the Application**
+
+    To stop the application, press Ctrl + C in the terminal where docker-compose up is running.
+    Alternatively, you can run docker-compose down to stop and remove the containers.

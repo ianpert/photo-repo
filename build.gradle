@@ -1,0 +1,45 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.3'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.ianpert'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src'
+        }
+	}
+}
+
+springBoot {
+    mainClass.value("com.ianpert.PhotosMicroservice")
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation("com.squareup.okhttp3:okhttp:4.12.0")
+  	implementation 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+bootJar.archiveFileName = "app.jar"
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
